@@ -25,12 +25,16 @@ public class Main {
 class MyFrame extends JFrame implements ActionListener{
 	public MyFrame() {
 		super();
+		//画面の生成
 		this.setSize(400, 200);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		//画面分割
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new GridLayout(1, 3));
+
+		//ボタン生成
 		JButton gButton = new JButton("グー");
 		JButton cButton = new JButton("チョキ");
 		JButton pButton = new JButton("パー");
@@ -46,15 +50,18 @@ class MyFrame extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		//選択ボタン受け取り
 		String cmd = e.getActionCommand();
 		int myChoice = Integer.parseInt(cmd);
 
+		//相手の手決定
 		Random rand = new Random();
 		int comChoice = rand.nextInt(3);
 
 		String result = "";
 		result += "あなたは" + toJankenChoice(myChoice) + "\n";
 		result += "相手は" + toJankenChoice(comChoice) + "\n";
+		//勝ち負け判定
 		switch(myChoice - comChoice) {
 		case -2:
 			result += "あなたの負けです\n";
@@ -74,9 +81,11 @@ class MyFrame extends JFrame implements ActionListener{
 		default:
 			break;
 		}
+		//ポップアップ表示
 		JOptionPane.showMessageDialog(null, result);
 	}
 
+	//整数をじゃんけんの手に変換
 	public String toJankenChoice(int choice) {
 		String str = "";
 		switch(choice) {
@@ -95,6 +104,7 @@ class MyFrame extends JFrame implements ActionListener{
 		return str;
 	}
 
+	//画面の表示
 	public void open() {
 		this.setVisible(true);
 	}
